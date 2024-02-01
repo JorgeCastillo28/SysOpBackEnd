@@ -21,11 +21,11 @@ Solo es necesaria una base de datos con collation: **utf8mb4_unicode_ci**
 Recuerda cambiar el app key (`php artisan key:generate`) y el dominio en el cual se encuentra tu aplicación., en este ejemplo es **prueba-sysop.test**, es necesario en: APP_URL, PASSPORT_ENDPOINT.
 
     ```jsx
-	APP_NAME=Prueba_SysOp
+	APP_NAME=Laravel
 	APP_ENV=local
-	APP_KEY=base64:QaBISkeXyu/SuNcInqmBb1uUKliZhJf46PX9GBph2T4=
+	APP_KEY=
 	APP_DEBUG=true
-	APP_URL=https://prueba-sysop.test
+	APP_URL=http://localhost
 
 	DEBUGBAR_ENABLED=false
 
@@ -34,9 +34,9 @@ Recuerda cambiar el app key (`php artisan key:generate`) y el dominio en el cual
 	DB_CONNECTION=mysql
 	DB_HOST=127.0.0.1
 	DB_PORT=3306
-	DB_DATABASE=prueba_sysop
+	DB_DATABASE=laravel
 	DB_USERNAME=root
-	DB_PASSWORD=root
+	DB_PASSWORD=
 
 	BROADCAST_DRIVER=log
 	CACHE_DRIVER=file
@@ -49,13 +49,13 @@ Recuerda cambiar el app key (`php artisan key:generate`) y el dominio en el cual
 	REDIS_PORT=6379
 
 	MAIL_MAILER=smtp
-	MAIL_HOST=sandbox.smtp.mailtrap.io
-	MAIL_PORT=2525
-	MAIL_USERNAME=fe976b3f7702ff
-	MAIL_PASSWORD=4e4e4042a71ef5
-	MAIL_ENCRYPTION=null
-	MAIL_FROM_ADDRESS="hello@example.com"
-	MAIL_FROM_NAME="${APP_NAME}"
+    MAIL_HOST=mailpit
+    MAIL_PORT=1025
+    MAIL_USERNAME=null
+    MAIL_PASSWORD=null
+    MAIL_ENCRYPTION=null
+    MAIL_FROM_ADDRESS="hello@example.com"
+    MAIL_FROM_NAME="${APP_NAME}"
 
 	AWS_ACCESS_KEY_ID=
 	AWS_SECRET_ACCESS_KEY=
@@ -76,12 +76,18 @@ Recuerda cambiar el app key (`php artisan key:generate`) y el dominio en el cual
 
 	SESSION_SECURE_COOKIE=true
 
-	GENERIC_RFC=XAXX010101000
-
-	PASSPORT_ENDPOINT=https://prueba-sysop.test/oauth/token
-	PASSPORT_CLIENT_ID=2
-	PASSPORT_CLIENT_SECRET=jbDzeNXtyl5m2bDn20TM4Y4pSPwUGPsDD6SA6DTg
+	PASSPORT_ENDPOINT=https://localhost.test/oauth/token
+	PASSPORT_CLIENT_ID=
+	PASSPORT_CLIENT_SECRET=
     ```
+
+## Migraciones
+
+Se deben de correr las migraciones con el comando `php artisan migrate`
+
+## Seeders
+
+Se deben de correr los seeders con el comando `php artisan db:seed` y `php artisan db:seed --class=LaratrustSeeder` para la configuración de usuarios de laratrust
 
 ## API / Auth
 
@@ -92,14 +98,14 @@ El sistema utiliza tokens con laravel passport, para la instalación de esto se 
 ```php
 Personal access client created successfully.
 Client ID: 1
-Client secret: 6GZw2UL0Zf6lUh3YtEcxABFXNNUjtERWODcOxPyT
+Client secret: ****************************************
 Password grant client created successfully.
 Client ID: 2
-Client secret: jbDzeNXtyl5m2bDn20TM4Y4pSPwUGPsDD6SA6DTg
+Client secret: ****************************************
 ```
 
-- Copia el token del cliente 2 y ponlo en tu .env
-
+- Copia el token del cliente 2 o Password Grant Client y ponlo en tu .env
 
 ## IMPORTANTE
-Para el caso de ya tener la base de datos con la información no será necesario crear los tokens de passport
+- Para el caso de ya tener la base de datos con la información no será necesario crear los tokens de passport
+- Para enviar los correos al agregar un nuevo usuario se utilizó mailtrap para pruebas, añadir la configuración necesaria en las variables de MAIL_ para poder enviar los correos
